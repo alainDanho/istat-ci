@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualités — ISTAT-CI</title>
+  <meta name="description" content="Suivez les dernières actualités de l'ISTAT-CI : inscriptions, événements, vidéos et vie de l'école.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 40px; }
+    .video-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      background: var(--white);
+    }
+    .video-card iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: none;
+      display: block;
+    }
+    .video-card-body { padding: 16px 20px; }
+    .video-card-body h3 { font-size: 1rem; color: var(--navy); margin-bottom: 6px; }
+    .video-card-body p { font-size: 0.85rem; color: var(--gray-600); }
+    .actu-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+    }
+    .actu-card img { width: 100%; height: 220px; object-fit: cover; }
+    .actu-card-body { padding: 24px; }
+    .actu-card-body .actu-date { font-size: 0.8rem; color: var(--red); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .actu-card-body h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 10px; }
+    .actu-card-body p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.6; }
+    .actu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+    @media (max-width: 768px) {
+      .video-grid { grid-template-columns: 1fr; }
+      .actu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="nav-overlay"></div>
+<nav class="navbar solid">
+  <div class="container">
+    <a href="../index.html" class="nav-logo"><img src="../assets/images/logo.jpg" alt="ISTAT-CI"></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Accueil</a></li>
+      <li><a href="formations.html">Formations</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="bourses.html">Bourses</a></li>
+      <li><a href="mediatheque.html">Médiathèque</a></li>
+      <li><a href="actualites.html" class="active">Actualités</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="preinscription.html" class="nav-cta">S'inscrire</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-bg" style="background-image:url('../assets/images/equipe_tarmac.jpg'); background-position: center 25%;"></div>
+  <div class="page-header-content">
+    <h1>Actualités</h1>
+    <p>Les dernières nouvelles de l'ISTAT-CI</p>
+  </div>
+</div>
+
+<!-- ACTUALITÉ PRINCIPALE -->
+<section class="section-light">
+  <div class="container">
+    <div class="section-header reveal visible">
+      <span class="label" style="color:var(--red);">À la une</span>
+      <h2>Inscriptions ouvertes 2026-2027</h2>
+      <p>Les préinscriptions pour la rentrée 2026-2027 sont lancées ! Formation par vague, cours de jour, du soir et en ligne. Bourses d'études exceptionnelles disponibles.</p>
+      <a href="preinscription.html" class="btn btn-primary mt-20">Se préinscrire maintenant</a>
+    </div>
+  </div>
+</section>
+
+<!-- VIDÉOS YOUTUBE -->
+<section class="section-navy">
+  <div class="container">
+    <div class="section-header reveal visible">
+      <span class="label">Nos vidéos</span>
+      <h2>L'ISTAT-CI en images</h2>
+      <p>Découvrez la vie de l'école, les témoignages et nos événements</p>
+    </div>
+    <div class="video-grid reveal visible">
+      <div class="video-card">
+        <div style="width:100%;aspect-ratio:16/9;background:var(--gray-100);display:flex;align-items:center;justify-content:center;">
+          <p style="color:var(--gray-600);font-size:0.9rem;text-align:center;padding:20px;">Vidéo YouTube à venir<br><small>Fournir le lien YouTube</small></p>
+        </div>
+        <div class="video-card-body">
+          <h3>Présentation de l'ISTAT-CI</h3>
+          <p>Découvrez notre institut et nos formations</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <div style="width:100%;aspect-ratio:16/9;background:var(--gray-100);display:flex;align-items:center;justify-content:center;">
+          <p style="color:var(--gray-600);font-size:0.9rem;text-align:center;padding:20px;">Vidéo YouTube à venir<br><small>Fournir le lien YouTube</small></p>
+        </div>
+        <div class="video-card-body">
+          <h3>Témoignages d'étudiants</h3>
+          <p>Nos étudiants partagent leur expérience</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <div style="width:100%;aspect-ratio:16/9;background:var(--gray-100);display:flex;align-items:center;justify-content:center;">
+          <p style="color:var(--gray-600);font-size:0.9rem;text-align:center;padding:20px;">Vidéo YouTube à venir<br><small>Fournir le lien YouTube</small></p>
+        </div>
+        <div class="video-card-body">
+          <h3>Cérémonie de remise de diplômes</h3>
+          <p>Revivez les moments forts de nos promotions</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <div style="width:100%;aspect-ratio:16/9;background:var(--gray-100);display:flex;align-items:center;justify-content:center;">
+          <p style="color:var(--gray-600);font-size:0.9rem;text-align:center;padding:20px;">Vidéo YouTube à venir<br><small>Fournir le lien YouTube</small></p>
+        </div>
+        <div class="video-card-body">
+          <h3>Vie à l'ISTAT-CI</h3>
+          <p>Le quotidien de nos étudiants</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTRES ACTUALITÉS -->
+<section class="section-light">
+  <div class="container">
+    <div class="section-header reveal visible">
+      <span class="label" style="color:var(--red);">Fil d'actualité</span>
+      <h2>Dernières nouvelles</h2>
+    </div>
+    <div class="actu-grid reveal visible">
+      <div class="actu-card">
+        <img src="../assets/images/equipe_tarmac.jpg" alt="Rentrée 2026-2027" loading="lazy" style="object-position:center 25%;">
+        <div class="actu-card-body">
+          <div class="actu-date">Juillet 2026</div>
+          <h3>Ouverture des inscriptions 2026-2027</h3>
+          <p>Les inscriptions sont ouvertes pour toutes les filières. Formation par vague, cours de jour, du soir et en ligne. Date limite : 31 juillet 2026.</p>
+        </div>
+      </div>
+      <div class="actu-card">
+        <img src="../assets/images/alumni_2.png" alt="Alumni Emirates" loading="lazy" style="object-position:center top;">
+        <div class="actu-card-body">
+          <div class="actu-date">2026</div>
+          <h3>Nos alumni chez Emirates</h3>
+          <p>Encore une ancienne étudiante de l'ISTAT-CI recrutée par Emirates, confirmant l'excellence de notre formation reconnue à l'international.</p>
+        </div>
+      </div>
+      <div class="actu-card">
+        <img src="../assets/images/hotesse_avion.jpg" alt="Bourses d'études" loading="lazy">
+        <div class="actu-card-body">
+          <div class="actu-date">2026</div>
+          <h3>Bourses d'études exceptionnelles</h3>
+          <p>La Direction Générale offre des bourses et prises en charge exceptionnelles. Options CQP national et IATA international disponibles.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-navy" style="padding:60px 0;">
+  <div class="container" style="text-align:center;">
+    <h2>Rejoignez l'ISTAT-CI</h2>
+    <p style="color:rgba(255,255,255,0.85);margin-bottom:24px;">Inscriptions ouvertes — Rentrée 2026-2027</p>
+    <div class="hero-cta-group">
+      <a href="preinscription.html" class="btn btn-primary" style="background:var(--white);color:var(--red);">Préinscription</a>
+      <a href="tel:+2250759520459" class="btn btn-outline">Appeler le 07 59 52 04 59</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="../assets/images/logo.jpg" alt="ISTAT-CI">
+        <p>Institut Supérieur pour les Techniques de l'Aviation et du Tourisme — Côte d'Ivoire.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/profile.php?id=61577491554635" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.instagram.com/istat.ci/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.1 1.3C1.3 2.6.9 3.3.6 4.1.3 4.9.1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.1 1.3.3 2.1.6 2.9.3.8.7 1.5 1.3 2.1.7.7 1.3 1.1 2.1 1.3.8.3 1.7.5 2.9.6 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.3-.1 2.1-.3 2.9-.6.8-.3 1.5-.7 2.1-1.3.7-.7 1.1-1.3 1.3-2.1.3-.8.5-1.7.6-2.9.1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.1-1.3-.3-2.1-.6-2.9-.3-.8-.7-1.5-1.3-2.1C21.4 1.3 20.7.9 19.9.6 19.1.3 18.2.1 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg></a>
+          <a href="https://www.youtube.com/@IstatC%C3%B4tedIvoire" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg></a>
+        </div>
+      </div>
+      <div><h5>Navigation</h5><ul><li><a href="../index.html">Accueil</a></li><li><a href="formations.html">Formations</a></li><li><a href="a-propos.html">À propos</a></li><li><a href="bourses.html">Bourses</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h5>Formations</h5><ul><li><a href="formations.html">Hôtesse de l'air</a></li><li><a href="formations.html">Agent de voyage</a></li><li><a href="formations.html">Fret & Logistique</a></li><li><a href="formations.html">Technique aéro</a></li></ul></div>
+      <div><h5>Contact</h5><ul><li><a href="tel:+2250759520459">+225 07 59 52 04 59</a></li><li><a href="tel:+2250101634545">+225 01 01 63 45 45</a></li><li>Abidjan — Plateau</li></ul></div>
+    </div>
+    <div class="footer-bottom">ISTAT-CI © 2026 — Tous droits réservés. Une école, un avenir.</div>
+  </div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

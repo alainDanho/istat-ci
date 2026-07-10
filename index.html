@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISTAT-CI — Une école, un avenir</title>
+  <meta name="description" content="Institut Supérieur pour les Techniques de l'Aviation et du Tourisme — Formations certifiées IATA en aviation, tourisme, logistique et aéronautique en Côte d'Ivoire.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ══════════ NAV OVERLAY (mobile) ══════════ -->
+<div class="nav-overlay"></div>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<nav class="navbar transparent">
+  <div class="container">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/images/logo.jpg" alt="ISTAT-CI">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Accueil</a></li>
+      <li><a href="pages/formations.html">Formations</a></li>
+      <li><a href="pages/a-propos.html">À propos</a></li>
+      <li><a href="pages/bourses.html">Bourses</a></li>
+      <li><a href="pages/mediatheque.html">Médiathèque</a></li>
+      <li><a href="pages/actualites.html">Actualités</a></li>
+      <li><a href="pages/contact.html">Contact</a></li>
+      <li><a href="pages/preinscription.html" class="nav-cta">S'inscrire</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline poster="assets/images/equipe_tarmac.jpg">
+    <source src="assets/videos/hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badges">
+      <span class="hero-badge">Certifié IATA</span>
+      <span class="hero-badge">+20 ans d'excellence</span>
+      <span class="hero-badge">Agréé ANAC</span>
+    </div>
+    <h1>Votre avenir dans <span>l'aviation</span> commence ici</h1>
+    <p>Formations professionnelles de 9 à 12 mois en aviation, tourisme, logistique et aéronautique. Bourses d'études exceptionnelles disponibles.</p>
+    <div class="hero-cta-group">
+      <a href="pages/preinscription.html" class="btn btn-primary">Préinscription</a>
+      <a href="pages/formations.html" class="btn btn-outline">Nos formations</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+  <div class="hero-video-controls">
+    <button id="videoPauseBtn" aria-label="Pause vidéo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ══════════ CHIFFRES CLÉS ══════════ -->
+<section class="section-navy">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <div class="stat-number" data-count="20" data-suffix="+">0</div>
+        <div class="stat-label">Années d'expérience</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number" data-count="15" data-suffix="+">0</div>
+        <div class="stat-label">Filières de formation</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number" data-count="6">0</div>
+        <div class="stat-label">Centres en Côte d'Ivoire</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number" data-count="80" data-suffix="%">0</div>
+        <div class="stat-label">Réduction bourses d'études</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PRÉSENTATION ══════════ -->
+<section>
+  <div class="container">
+    <div class="transform-grid">
+      <div class="transform-image reveal-left">
+        <img src="assets/images/avant_apres_2.jpg" alt="D'étudiante à professionnelle de l'aviation" loading="lazy">
+      </div>
+      <div class="transform-text reveal-right">
+        <span class="label" style="color:var(--gold);font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;">Votre transformation</span>
+        <h3>D'étudiant à professionnel de l'aviation</h3>
+        <p>En seulement 9 mois de formation théorique et 3 mois de stage pratique, l'ISTAT-CI transforme votre ambition en une carrière internationale dans l'aviation, le tourisme ou la logistique.</p>
+        <p>Nos diplômés exercent dans les plus grandes compagnies aériennes du monde, dont Emirates.</p>
+        <a href="pages/formations.html" class="btn btn-navy mt-20">Découvrir nos formations →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PARALLAX DIVIDER ══════════ -->
+<div class="parallax-section">
+  <div class="parallax-bg" style="background-image: url('assets/images/avion_atterrissage.jpg');"></div>
+  <div class="parallax-overlay"></div>
+  <div class="parallax-content reveal">
+    <h2>Demain, c'est aujourd'hui.<br><span class="text-gold">Réveille-toi, c'est le moment !</span></h2>
+    <a href="pages/preinscription.html" class="btn btn-primary mt-20">Candidater maintenant</a>
+  </div>
+</div>
+
+<!-- ══════════ FORMATIONS (APERÇU) ══════════ -->
+<section class="section-light">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">Nos formations</span>
+      <h2>Des métiers qui font rêver,<br>des carrières qui se construisent</h2>
+      <p>Découvrez nos pôles de formation certifiés IATA et agréés par l'ANAC</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:24px;margin-top:16px;">
+        <img src="assets/images/iata_logo.webp" alt="IATA" style="height:45px;background:#fff;border-radius:8px;padding:6px 12px;">
+        <img src="assets/images/anac_logo.jpeg" alt="ANAC" style="height:45px;background:#fff;border-radius:8px;padding:6px 12px;">
+      </div>
+    </div>
+    <div class="formations-grid">
+      <div class="formation-card reveal">
+        <div class="formation-card-img">
+          <img src="assets/images/hotesse_avion.jpg" alt="Hôtesse de l'air" loading="lazy">
+        </div>
+        <div class="formation-card-body">
+          <h3>Hôtesse de l'air & Steward</h3>
+          <p>Formation complète au métier de Personnel Navigant Commercial (PNC) pour les compagnies aériennes internationales.</p>
+          <a href="pages/formations.html" class="formation-card-link">En savoir plus →</a>
+        </div>
+      </div>
+      <div class="formation-card reveal">
+        <div class="formation-card-img">
+          <img src="assets/images/tourisme.jpg" alt="Agent de voyage et tourisme" loading="lazy">
+        </div>
+        <div class="formation-card-body">
+          <h3>Voyage, Tourisme & Hôtellerie</h3>
+          <p>Devenez agent de voyage, guide touristique ou professionnel de l'hôtellerie avec une certification reconnue.</p>
+          <a href="pages/formations.html" class="formation-card-link">En savoir plus →</a>
+        </div>
+      </div>
+      <div class="formation-card reveal">
+        <div class="formation-card-img">
+          <img src="assets/images/fret_aerien.jpg" alt="Fret aérien et logistique" loading="lazy">
+        </div>
+        <div class="formation-card-body">
+          <h3>Transit, Fret & Logistique</h3>
+          <p>Maîtrisez la chaîne logistique du transport aérien et maritime, du fret à la sûreté aéroportuaire.</p>
+          <a href="pages/formations.html" class="formation-card-link">En savoir plus →</a>
+        </div>
+      </div>
+      <div class="formation-card reveal">
+        <div class="formation-card-img">
+          <img src="assets/images/technicien_aero.jpg" alt="Technicien aéronautique" loading="lazy">
+        </div>
+        <div class="formation-card-body">
+          <h3>Aéronautique & Technique</h3>
+          <p>Formation de base pour pilote de ligne, mécanicien d'avion et technicien aéronautique.</p>
+          <a href="pages/formations.html" class="formation-card-link">En savoir plus →</a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-40 reveal">
+      <a href="pages/formations.html" class="btn btn-navy">Voir toutes les formations →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CERTIFICATIONS ══════════ -->
+<section class="section-dark">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">Reconnaissances</span>
+      <h2>Une excellence certifiée</h2>
+      <p>Seule école de Côte d'Ivoire distinguée par l'IATA Canada et certifiée par l'ANAC</p>
+    </div>
+    <div class="certif-row reveal">
+      <div class="certif-item">
+        <img src="assets/images/iata_logo.webp" alt="IATA">
+        <span>Certifié IATA Canada</span>
+      </div>
+      <div class="certif-item">
+        <img src="assets/images/anac_logo.jpeg" alt="ANAC">
+        <span>Agréé ANAC</span>
+      </div>
+      <div class="certif-item">
+        <img src="assets/images/presidence_logo.webp" alt="Présidence de la République de Côte d'Ivoire" style="height:70px;">
+        <span>Félicitations du Chef de l'État</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CTA BOURSES ══════════ -->
+<section>
+  <div class="container">
+    <div class="transform-grid">
+      <div class="transform-text reveal-left">
+        <span class="label" style="color:var(--red);font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;">Bourses d'études</span>
+        <h3>Des bourses exceptionnelles pour réaliser vos rêves</h3>
+        <p>La Direction Générale de l'ISTAT offre chaque année des bourses d'études et des prises en charge exceptionnelles. Le talent ne doit pas être freiné par des contraintes financières.</p>
+        <p>Deux options disponibles : formation nationale CQP ou certification internationale IATA.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;" class="mt-20">
+          <a href="pages/bourses.html" class="btn btn-primary">En savoir plus</a>
+          <a href="pages/preinscription.html" class="btn btn-navy">Postuler maintenant</a>
+        </div>
+      </div>
+      <div class="transform-image reveal-right">
+        <img src="assets/images/etudiant_etude.jpg" alt="Étudiant ISTAT-CI en salle d'étude" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CTA FINAL ══════════ -->
+<div class="parallax-section">
+  <div class="parallax-bg" style="background-image: url('assets/images/pilote_hotesse.jpg');"></div>
+  <div class="parallax-overlay" style="background:rgba(200,16,46,0.75);"></div>
+  <div class="parallax-content reveal">
+    <h2>Prêt à décoller vers votre avenir ?</h2>
+    <p style="color:rgba(255,255,255,0.85);font-size:1.1rem;margin-bottom:24px;">Inscriptions ouvertes — Tests d'entrée 2026-2027</p>
+    <div class="hero-cta-group">
+      <a href="pages/preinscription.html" class="btn btn-primary" style="background:var(--white);color:var(--red);">Préinscription</a>
+      <a href="tel:+2250759520459" class="btn btn-outline">Appeler le 07 59 52 04 59</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/images/logo.jpg" alt="ISTAT-CI">
+        <p>Institut Supérieur pour les Techniques de l'Aviation et du Tourisme — Côte d'Ivoire. Plus de 20 ans d'excellence dans la formation des professionnels de l'aviation.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/profile.php?id=61577491554635" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.instagram.com/istat.ci/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.1 1.3C1.3 2.6.9 3.3.6 4.1.3 4.9.1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.1 1.3.3 2.1.6 2.9.3.8.7 1.5 1.3 2.1.7.7 1.3 1.1 2.1 1.3.8.3 1.7.5 2.9.6 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.3-.1 2.1-.3 2.9-.6.8-.3 1.5-.7 2.1-1.3.7-.7 1.1-1.3 1.3-2.1.3-.8.5-1.7.6-2.9.1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.1-1.3-.3-2.1-.6-2.9-.3-.8-.7-1.5-1.3-2.1C21.4 1.3 20.7.9 19.9.6 19.1.3 18.2.1 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg></a>
+          <a href="https://www.youtube.com/@IstatC%C3%B4tedIvoire" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5>Navigation</h5>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="pages/formations.html">Formations</a></li>
+          <li><a href="pages/a-propos.html">À propos</a></li>
+          <li><a href="pages/bourses.html">Bourses</a></li>
+          <li><a href="pages/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Formations</h5>
+        <ul>
+          <li><a href="pages/formations.html">Hôtesse de l'air</a></li>
+          <li><a href="pages/formations.html">Agent de voyage</a></li>
+          <li><a href="pages/formations.html">Fret & Logistique</a></li>
+          <li><a href="pages/formations.html">Technique aéro</a></li>
+          <li><a href="pages/formations.html">Sûreté aéroportuaire</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:+2250759520459">+225 07 59 52 04 59</a></li>
+          <li><a href="tel:+2250101634545">+225 01 01 63 45 45</a></li>
+          <li>Abidjan — Plateau</li>
+          <li>Yamoussoukro</li>
+          <li>Bouaké • San Pedro</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      ISTAT-CI © 2026 — Tous droits réservés. Une école, un avenir.
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
