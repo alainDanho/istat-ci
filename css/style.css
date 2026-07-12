@@ -294,6 +294,15 @@ button { font-family: inherit; cursor: pointer; border: none; }
 }
 .hero-video-controls button:hover { background: rgba(255,255,255,0.25); }
 
+@media (max-width: 768px) {
+  .hero-content { padding-top: 8vh; }
+  .hero-badges { margin-bottom: 20px; }
+  .hero-content h1 { margin-bottom: 14px; }
+  .hero-content p { margin-bottom: 20px; font-size: 0.95rem; }
+  .hero-cta-group { gap: 10px; }
+  .hero-cta-group .btn { padding: 12px 24px; font-size: 0.9rem; }
+}
+
 /* ══════════ SECTIONS ══════════ */
 section { padding: 100px 0; }
 @media (max-width: 768px) { section { padding: 60px 0; } }
