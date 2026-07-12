@@ -94,4 +94,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const href = a.getAttribute('href').split('/').pop();
     if (href === currentPage) a.classList.add('active');
   });
+
 });
+
+// ── RESPONSIVE IMAGES ──
+function applyResponsiveImages() {
+  var skipFiles = ['logo.jpg','anac_logo.jpeg','iata_logo.webp','presidence_logo.webp','logo_fdfp.jpeg','logo_fdfp_2.jpeg'];
+  var w = window.innerWidth;
+  var folder = w <= 480 ? 'small/' : w <= 1024 ? 'medium/' : '';
+
+  if (folder) {
+    document.querySelectorAll('.page-header-bg, .parallax-bg').forEach(function(el) {
+      var bg = el.style.backgroundImage;
+      if (bg.indexOf('/' + folder) !== -1) return;
+      var m = bg.match(/url\(['"]?(.*?assets\/images\/)([^'"/)]+)['"]?\)/);
+      if (m && skipFiles.indexOf(m[2]) === -1) {
+        el.style.backgroundImage = bg.replace(m[1] + m[2], m[1] + folder + m[2]);
+      }
+    });
+  }
+
+  document.querySelectorAll('img[src*="assets/images/"]:not([srcset])').forEach(function(img) {
+    var src = img.getAttribute('src');
+    var m = src.match(/(.*?assets\/images\/)([^/]+)$/);
+    if (!m || skipFiles.indexOf(m[2]) !== -1) return;
+    var base = m[1], file = m[2];
+    img.setAttribute('srcset', base + 'small/' + file + ' 400w, ' + base + 'medium/' + file + ' 800w, ' + base + file + ' 1600w');
+    img.setAttribute('sizes', '(max-width: 480px) 400px, (max-width: 1024px) 800px, 1600px');
+  });
+}
+if (document.readyState === 'complete') { applyResponsiveImages(); }
+else { window.addEventListener('load', applyResponsiveImages); }

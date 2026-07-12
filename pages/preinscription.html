@@ -161,11 +161,11 @@
     <a href="../index.html" class="nav-logo"><img src="../assets/images/logo.jpg" alt="ISTAT-CI"></a>
     <ul class="nav-links">
       <li><a href="../index.html">Accueil</a></li>
-      <li><a href="formations.html">Formations</a></li>
-      <li><a href="a-propos.html">À propos</a></li>
-      <li><a href="bourses.html">Bourses</a></li>
-      <li><a href="mediatheque.html">Médiathèque</a></li>
       <li><a href="actualites.html">Actualités</a></li>
+      <li><a href="formations.html">Formations</a></li>
+      <li><a href="bourses.html">Bourses</a></li>
+      <li><a href="mediatheque.html">Galerie</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
       <li><a href="contact.html">Contact</a></li>
       <li><a href="preinscription.html" class="nav-cta active">S'inscrire</a></li>
     </ul>
@@ -205,7 +205,7 @@
               <input type="date" name="dateNaissance" required>
             </div>
             <div class="form-group">
-              <label>Sexe <span class="required">*</span></label>
+              <label>Genre <span class="required">*</span></label>
               <select name="sexe" required>
                 <option value="">— Sélectionner —</option>
                 <option value="Masculin">Masculin</option>
@@ -215,6 +215,37 @@
             <div class="form-group">
               <label>Nationalité <span class="required">*</span></label>
               <input type="text" name="nationalite" required placeholder="Ex: Ivoirienne">
+            </div>
+            <div class="form-group">
+              <label>Pays de résidence <span class="required">*</span></label>
+              <select name="paysResidence" required id="paysResidence">
+                <option value="">— Sélectionner —</option>
+                <option value="CI" data-indicatif="+225">Côte d'Ivoire (+225)</option>
+                <option value="BF" data-indicatif="+226">Burkina Faso (+226)</option>
+                <option value="ML" data-indicatif="+223">Mali (+223)</option>
+                <option value="SN" data-indicatif="+221">Sénégal (+221)</option>
+                <option value="GN" data-indicatif="+224">Guinée (+224)</option>
+                <option value="TG" data-indicatif="+228">Togo (+228)</option>
+                <option value="BJ" data-indicatif="+229">Bénin (+229)</option>
+                <option value="NE" data-indicatif="+227">Niger (+227)</option>
+                <option value="CM" data-indicatif="+237">Cameroun (+237)</option>
+                <option value="GA" data-indicatif="+241">Gabon (+241)</option>
+                <option value="CG" data-indicatif="+242">Congo (+242)</option>
+                <option value="CD" data-indicatif="+243">RD Congo (+243)</option>
+                <option value="TD" data-indicatif="+235">Tchad (+235)</option>
+                <option value="CF" data-indicatif="+236">Centrafrique (+236)</option>
+                <option value="MR" data-indicatif="+222">Mauritanie (+222)</option>
+                <option value="MG" data-indicatif="+261">Madagascar (+261)</option>
+                <option value="MA" data-indicatif="+212">Maroc (+212)</option>
+                <option value="TN" data-indicatif="+216">Tunisie (+216)</option>
+                <option value="DZ" data-indicatif="+213">Algérie (+213)</option>
+                <option value="FR" data-indicatif="+33">France (+33)</option>
+                <option value="BE" data-indicatif="+32">Belgique (+32)</option>
+                <option value="CH" data-indicatif="+41">Suisse (+41)</option>
+                <option value="CA" data-indicatif="+1">Canada (+1)</option>
+                <option value="US" data-indicatif="+1">États-Unis (+1)</option>
+                <option value="OTHER" data-indicatif="">Autre pays</option>
+              </select>
             </div>
             <div class="form-group">
               <label>Ville de résidence <span class="required">*</span></label>
@@ -229,11 +260,17 @@
           <div class="form-grid">
             <div class="form-group">
               <label>Téléphone <span class="required">*</span></label>
-              <input type="tel" name="telephone" required placeholder="Ex: 07 XX XX XX XX">
+              <div style="display:flex;gap:8px;">
+                <input type="text" name="indicatifTel" id="indicatifTel" style="width:80px;flex-shrink:0;text-align:center;" readonly placeholder="+XXX">
+                <input type="tel" name="telephone" required placeholder="Numéro de téléphone" style="flex:1;">
+              </div>
             </div>
             <div class="form-group">
               <label>Téléphone WhatsApp</label>
-              <input type="tel" name="whatsapp" placeholder="Si différent du numéro principal">
+              <div style="display:flex;gap:8px;">
+                <input type="text" name="indicatifWa" id="indicatifWa" style="width:80px;flex-shrink:0;text-align:center;" readonly placeholder="+XXX">
+                <input type="tel" name="whatsapp" placeholder="Si différent du principal" style="flex:1;">
+              </div>
             </div>
             <div class="form-group form-full">
               <label>Email</label>
@@ -246,35 +283,38 @@
         <div class="form-section">
           <div class="form-section-title"><span class="step">3</span> Niveau d'études & Formation</div>
           <div class="form-grid">
-            <div class="form-group form-full">
-              <label>Dernier diplôme ou niveau atteint <span class="required">*</span></label>
-              <select name="niveau" required>
-                <option value="">— Sélectionner —</option>
-                <option value="3ème">3ème</option>
-                <option value="Seconde">Seconde</option>
-                <option value="Première">Première</option>
-                <option value="Terminale">Terminale</option>
-                <option value="BAC">BAC</option>
-                <option value="BAC+1">BAC+1</option>
-                <option value="BAC+2">BAC+2</option>
-                <option value="BAC+3 ou plus">BAC+3 ou plus</option>
-              </select>
+            <div class="form-group">
+              <label>Niveau d'études ou équivalent <span class="required">*</span></label>
+              <input type="text" name="niveau" required placeholder="Ex: Terminale, BAC, BAC+2...">
+            </div>
+            <div class="form-group">
+              <label>Dernier diplôme ou équivalent <span class="required">*</span></label>
+              <input type="text" name="diplome" required placeholder="Ex: BAC série D, BTS, Licence...">
             </div>
             <div class="form-group form-full">
-              <label>Filière(s) souhaitée(s) <span class="required">*</span></label>
+              <label>Spécialité(s) souhaitée(s) <span class="required">*</span></label>
               <div class="checkbox-grid">
                 <label class="checkbox-item"><input type="checkbox" name="filieres" value="Hôtesse de l'air & d'accueil"><span>Hôtesse de l'air & d'accueil</span></label>
                 <label class="checkbox-item"><input type="checkbox" name="filieres" value="Agent de voyage, tourisme & hôtellerie"><span>Agent de voyage, tourisme & hôtellerie</span></label>
-                <label class="checkbox-item"><input type="checkbox" name="filieres" value="Agent d'escale"><span>Agent d'escale</span></label>
-                <label class="checkbox-item"><input type="checkbox" name="filieres" value="Assistant aux passagers & Guide touristique"><span>Assistant aux passagers & Guide touristique</span></label>
+                <label class="checkbox-item"><input type="checkbox" name="filieres" value="Agent d'escale, assistant aux passagers & guide touristique"><span>Agent d'escale, assistant aux passagers & guide touristique</span></label>
                 <label class="checkbox-item"><input type="checkbox" name="filieres" value="Agent de fret aérien & maritime"><span>Agent de fret aérien & maritime</span></label>
-                <label class="checkbox-item"><input type="checkbox" name="filieres" value="Agent des transports & logistique"><span>Agent des transports & logistique</span></label>
+                <label class="checkbox-item"><input type="checkbox" name="filieres" value="Consultant en transports et logistique"><span>Consultant en transports et logistique</span></label>
                 <label class="checkbox-item"><input type="checkbox" name="filieres" value="Sûreté & sécurité aéroportuaire"><span>Sûreté & sécurité aéroportuaire</span></label>
-                <label class="checkbox-item"><input type="checkbox" name="filieres" value="Pilote de ligne (formation de base)"><span>Pilote de ligne (formation de base)</span></label>
-                <label class="checkbox-item"><input type="checkbox" name="filieres" value="Mécanicien d'avion"><span>Mécanicien d'avion</span></label>
-                <label class="checkbox-item"><input type="checkbox" name="filieres" value="Technicien aéronautique"><span>Technicien aéronautique</span></label>
-                <label class="checkbox-item"><input type="checkbox" name="filieres" value="Informatique, Réseau & Sécurité"><span>Informatique, Réseau & Sécurité</span></label>
-                <label class="checkbox-item"><input type="checkbox" name="filieres" value="Communication & Gestion d'Entreprise"><span>Communication & Gestion d'Entreprise</span></label>
+                <label class="checkbox-item"><input type="checkbox" name="filieres" value="Pilote de ligne (formation de base)" data-condition="technique"><span>Pilote de ligne (formation de base)</span></label>
+                <label class="checkbox-item"><input type="checkbox" name="filieres" value="Mécanicien d'avion" data-condition="technique"><span>Mécanicien d'avion</span></label>
+                <label class="checkbox-item"><input type="checkbox" name="filieres" value="Technicien aéronautique" data-condition="technique"><span>Technicien aéronautique</span></label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modale conditionnelle filières techniques -->
+          <div id="conditionModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;">
+            <div style="background:var(--white);border-radius:16px;max-width:500px;width:90%;padding:30px 36px;box-shadow:0 20px 60px rgba(0,0,0,0.3);text-align:center;">
+              <h3 style="color:var(--navy);margin-bottom:16px;font-size:1.15rem;">Conditions requises</h3>
+              <p style="color:var(--text);line-height:1.7;margin-bottom:24px;font-size:0.95rem;">Cette spécialité requiert les conditions suivantes :<br><br><strong>BAC scientifique</strong>, âge <strong>19 ans maximum</strong>, niveau d'anglais <strong>parfait ou moyen</strong>, bonne <strong>santé visuelle</strong>, bonne maîtrise de l'<strong>outil informatique</strong>.<br><br>Confirmez-vous remplir ces conditions ?</p>
+              <div style="display:flex;gap:12px;justify-content:center;">
+                <button type="button" id="conditionOui" class="btn btn-primary" style="padding:12px 36px;">Oui</button>
+                <button type="button" id="conditionNon" class="btn btn-outline" style="padding:12px 36px;border-color:var(--red);color:var(--red);">Non</button>
               </div>
             </div>
           </div>
@@ -288,14 +328,6 @@
             <div class="radio-group">
               <label class="radio-item"><input type="radio" name="bourse" value="CQP National" required><span>CQP National</span></label>
               <label class="radio-item"><input type="radio" name="bourse" value="IATA International"><span>IATA International</span></label>
-            </div>
-          </div>
-          <div class="form-group" style="margin-top:16px;">
-            <label>Horaire souhaité <span class="required">*</span></label>
-            <div class="radio-group">
-              <label class="radio-item"><input type="radio" name="horaire" value="Jour" required><span>Cours de jour</span></label>
-              <label class="radio-item"><input type="radio" name="horaire" value="Soir"><span>Cours du soir</span></label>
-              <label class="radio-item"><input type="radio" name="horaire" value="En ligne"><span>En ligne</span></label>
             </div>
           </div>
         </div>
@@ -363,7 +395,7 @@
       <div><h5>Formations</h5><ul><li><a href="formations.html">Hôtesse de l'air</a></li><li><a href="formations.html">Agent de voyage</a></li><li><a href="formations.html">Fret & Logistique</a></li><li><a href="formations.html">Technique aéro</a></li></ul></div>
       <div><h5>Contact</h5><ul><li><a href="tel:+2250759520459">+225 07 59 52 04 59</a></li><li><a href="tel:+2250101634545">+225 01 01 63 45 45</a></li><li>Abidjan — Plateau</li></ul></div>
     </div>
-    <div class="footer-bottom">ISTAT-CI © 2026 — Tous droits réservés. Une école, un avenir.</div>
+    <div class="footer-bottom">ISTAT-CI © 2026 — Tous droits réservés. Une école, un avenir !</div>
   </div>
 </footer>
 
@@ -458,11 +490,13 @@
     var dateNaissance = form.dateNaissance.value;
     var sexe = form.sexe.value;
     var nationalite = form.nationalite.value.trim();
+    var paysResidence = form.paysResidence.value;
     var ville = form.ville.value.trim();
     var telephone = form.telephone.value.trim();
-    var niveau = form.niveau.value;
+    var niveau = form.niveau.value.trim();
+    var diplome = form.diplome.value.trim();
 
-    if (!nom || !prenom || !dateNaissance || !sexe || !nationalite || !ville || !telephone || !niveau) {
+    if (!nom || !prenom || !dateNaissance || !sexe || !nationalite || !paysResidence || !ville || !telephone || !niveau || !diplome) {
       errorDiv.textContent = 'Veuillez remplir tous les champs obligatoires (*).';
       errorDiv.classList.add('show');
       errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -479,9 +513,8 @@
     }
 
     var bourseEl = form.querySelector('input[name="bourse"]:checked');
-    var horaireEl = form.querySelector('input[name="horaire"]:checked');
-    if (!bourseEl || !horaireEl) {
-      errorDiv.textContent = 'Veuillez sélectionner une option de formation et un horaire.';
+    if (!bourseEl) {
+      errorDiv.textContent = 'Veuillez sélectionner une option de formation.';
       errorDiv.classList.add('show');
       errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
@@ -498,20 +531,26 @@
         allFiles.push(b64);
       }
 
+      var indicatifTel = form.indicatifTel.value || '';
+      var indicatifWa = form.indicatifWa.value || '';
+      var paysSelect = document.getElementById('paysResidence');
+      var paysNom = paysSelect.options[paysSelect.selectedIndex].text.replace(/\s*\(.*\)/, '');
+
       var payload = {
         nom: nom,
         prenom: prenom,
         dateNaissance: dateNaissance,
         sexe: sexe,
         nationalite: nationalite,
+        paysResidence: paysNom,
         ville: ville,
-        telephone: telephone,
-        whatsapp: form.whatsapp.value.trim(),
+        telephone: indicatifTel + ' ' + telephone,
+        whatsapp: indicatifWa + ' ' + form.whatsapp.value.trim(),
         email: form.email.value.trim(),
         niveau: niveau,
+        diplome: form.diplome.value.trim(),
         filieres: filieres.join(', '),
         bourse: bourseEl.value,
-        horaire: horaireEl.value,
         motivation: form.motivation.value.trim(),
         fichiers: allFiles
       };
@@ -535,6 +574,53 @@
       form.classList.remove('form-loading');
       submitText.style.display = 'inline';
       submitSpinner.style.display = 'none';
+    }
+  });
+  // Indicatif pays → préremplir les champs téléphone
+  var paysSelect = document.getElementById('paysResidence');
+  var indicatifTelInput = document.getElementById('indicatifTel');
+  var indicatifWaInput = document.getElementById('indicatifWa');
+
+  paysSelect.addEventListener('change', function() {
+    var opt = paysSelect.options[paysSelect.selectedIndex];
+    var ind = opt.getAttribute('data-indicatif') || '';
+    indicatifTelInput.value = ind;
+    indicatifWaInput.value = ind;
+  });
+
+  // Modale conditionnelle pour filières techniques
+  var condModal = document.getElementById('conditionModal');
+  var condOui = document.getElementById('conditionOui');
+  var condNon = document.getElementById('conditionNon');
+  var pendingCheckbox = null;
+
+  document.querySelectorAll('input[data-condition="technique"]').forEach(function(cb) {
+    cb.addEventListener('change', function() {
+      if (cb.checked) {
+        pendingCheckbox = cb;
+        condModal.style.display = 'flex';
+      }
+    });
+  });
+
+  condOui.addEventListener('click', function() {
+    condModal.style.display = 'none';
+    pendingCheckbox = null;
+  });
+
+  condNon.addEventListener('click', function() {
+    if (pendingCheckbox) {
+      pendingCheckbox.checked = false;
+    }
+    condModal.style.display = 'none';
+    pendingCheckbox = null;
+  });
+
+  condModal.addEventListener('click', function(e) {
+    if (e.target === condModal) {
+      if (pendingCheckbox) pendingCheckbox.checked = false;
+      condModal.style.display = 'none';
+      pendingCheckbox = null;
     }
   });
 })();
