@@ -40,8 +40,17 @@
 <!-- ══════════ HERO ══════════ -->
 <section class="hero">
   <video class="hero-video" autoplay muted loop playsinline poster="assets/images/equipe_tarmac.jpg">
-    <source src="assets/videos/hero.mp4" type="video/mp4">
+    <source src="" type="video/mp4">
   </video>
+  <script>
+    (function(){
+      var w = window.innerWidth;
+      var src = w <= 480 ? 'assets/videos/hero_small.mp4' : w <= 1024 ? 'assets/videos/hero_medium.mp4' : 'assets/videos/hero.mp4';
+      var source = document.querySelector('.hero-video source');
+      source.src = src;
+      document.querySelector('.hero-video').load();
+    })();
+  </script>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-badges">
