@@ -301,6 +301,8 @@ button { font-family: inherit; cursor: pointer; border: none; }
   .hero-content p { margin-bottom: 20px; font-size: 0.95rem; }
   .hero-cta-group { gap: 10px; }
   .hero-cta-group .btn { padding: 12px 24px; font-size: 0.9rem; }
+  .hero-video { display: none; }
+  .hero-video-controls { display: none; }
 }
 
 /* ══════════ SECTIONS ══════════ */
