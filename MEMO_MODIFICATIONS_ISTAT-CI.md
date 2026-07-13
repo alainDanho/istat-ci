@@ -1,5 +1,5 @@
 # MÉMO DES MODIFICATIONS — Site Web ISTAT-CI
-**Dates : 11–12 juillet 2026**
+**Dates : 11–13 juillet 2026**
 
 ---
 
@@ -173,10 +173,48 @@ Accueil → Actualités → Formations → Bourses → Galerie → À propos →
 - Facebook : facebook.com/profile.php?id=61577491554635
 - Instagram : instagram.com/istat.ci
 - YouTube : youtube.com/@IstatCôtedIvoire
+- **WhatsApp** : wa.me/2250759520459 (ajouté le 13 juillet)
 
 ---
 
-## 9. DÉPLOIEMENT
+## 9. PAGE ACTUALITÉS — Image de fond
+- Nouvelle image de fond : **presse_aviation.png** — collage de magazines, écrans et journaux sur le thème de l'aviation et de l'ISTAT-CI (générée par IA)
+
+---
+
+## 10. OPTIMISATION PERFORMANCE (13 juillet)
+
+### Images responsives
+- **3 versions par image** : originale (1600px), medium (800px), small (400px) dans `assets/images/medium/` et `assets/images/small/`
+- Attributs `srcset` et `sizes` ajoutés directement dans le HTML pour toutes les images de contenu (logos exclus)
+- Le navigateur charge automatiquement la version adaptée à l'écran
+
+### Compression des images
+- **Logo** : 2.8 Mo → 13 Ko (redimensionné à 200px + optimisé PIL)
+- **Images totales** : 51 Mo → 8.4 Mo (originaux) / 1.6 Mo (mobile)
+- Toutes les images JPG recompressées avec PIL (quality 75, optimize)
+- Les gros PNG redimensionnés et optimisés
+
+### Vidéo hero responsive
+- 3 versions de la vidéo d'accueil :
+  - **Mobile** (≤480px) : `hero_small.mp4` — 1.5 Mo (480p)
+  - **Tablette** (≤1024px) : `hero_medium.mp4` — 3.3 Mo (720p compressée)
+  - **Desktop** : `hero.mp4` — 6.2 Mo (720p original)
+- Sélection automatique via JavaScript selon la largeur d'écran
+
+### Ajustement hero mobile
+- `padding-top`, espacement des badges, taille des boutons réduits pour que le bouton **Préinscription** soit visible sans scroller
+
+### Repositionnement d'images
+- Image CTA bourses (« N'attendez plus ») : `background-position: center 25%` — visage de l'hôtesse visible
+- Image carte « Assistant aux passagers » (formations) : `object-position: center 25%` — visage de la dame au comptoir visible
+
+### Corrections de texte
+- « spécificités » → **« spécialités »** (texte principal page d'accueil)
+
+---
+
+## 11. DÉPLOIEMENT
 
 ### GitHub
 - Code source poussé sur GitHub : **github.com/alainDanho/istat-ci**
@@ -188,7 +226,7 @@ Accueil → Actualités → Formations → Bourses → Galerie → À propos →
 
 ---
 
-## 10. POINTS EN ATTENTE
+## 12. POINTS EN ATTENTE
 
 - [ ] Configurer le sous-domaine preinscription.istat.ci chez OxaHost
 - [ ] Déployer le site sur l'hébergement OxaHost (domaine istat.ci)
