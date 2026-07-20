@@ -39,12 +39,82 @@
     .actu-card-body .actu-date { font-size: 0.8rem; color: var(--red); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
     .actu-card-body h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 10px; }
     .actu-card-body p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.6; }
-    .actu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+    .actu-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-flow: dense; gap: 24px; margin-top: 40px; }
+    @media (min-width: 769px) and (max-width: 1023px) {
+      .actu-grid { grid-template-columns: repeat(2, 1fr); }
+    }
     @media (max-width: 768px) {
       .video-grid { grid-template-columns: 1fr; }
       .actu-grid { grid-template-columns: 1fr; }
     }
-    /* ÉDITORIAL DG */
+    /* CARTE D'ARTICLE AGRANDIE AU CLIC SUR "LIRE LA SUITE" */
+    @media (min-width: 769px) {
+      .actu-card.is-expanded { grid-column: span 2; }
+      .actu-card.is-expanded img { height: 280px; }
+    }
+    .actu-card { transition: box-shadow 0.3s; }
+    .actu-card.is-expanded { box-shadow: var(--shadow-lg); z-index: 1; }
+    /* ÉDITORIAL DG — SOMMAIRE + GRANDE CARTE */
+    .editorial-layout {
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .editorial-sommaire {
+      position: sticky;
+      top: 100px;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      padding: 26px 22px;
+    }
+    .editorial-sommaire h4 {
+      font-size: 1.296rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .editorial-sommaire ul { list-style: disc; padding: 0 0 0 20px; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .editorial-sommaire li::marker { color: var(--red); }
+    .editorial-sommaire a {
+      display: block;
+      color: var(--text);
+      font-size: 1.012rem;
+      font-weight: 500;
+      font-style: italic;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .editorial-sommaire a:hover { color: var(--red); }
+    @media (max-width: 900px) {
+      .editorial-layout { grid-template-columns: 1fr; }
+      .editorial-sommaire { position: static; }
+    }
+    .editorial-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 48px;
+    }
+    @media (max-width: 768px) {
+      .editorial-card { padding: 28px 22px; }
+    }
+    .editorial-card details summary {
+      color: var(--red);
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      margin-top: 4px;
+    }
+    .editorial-card details summary::-webkit-details-marker { display: none; }
+    .editorial-card details summary::after { content: " →"; }
+    .editorial-card details[open] summary::after { content: " ↑"; }
+    .editorial-card details .details-content { padding-top: 18px; }
+
     .editorial-photo {
       float: right;
       width: 242px;
@@ -65,6 +135,66 @@
         height: 210px;
       }
     }
+
+    /* PETITES CARTES ARTICLES */
+    .actu-card { position: relative; }
+    .actu-card-featured { box-shadow: var(--shadow-md); }
+    .actu-card-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: var(--red);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 5px 12px;
+      border-radius: 50px;
+      z-index: 2;
+    }
+    .actu-card-body details { margin-top: 12px; }
+    .actu-card-body summary {
+      color: var(--red);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      list-style: none;
+    }
+    .actu-card-body summary::-webkit-details-marker { display: none; }
+    .actu-card-body summary::after { content: " →"; }
+    .actu-card-body details[open] summary::after { content: " ↑"; }
+    .actu-card-body .details-content { padding-top: 14px; font-size: 0.92rem; line-height: 1.7; color: var(--text); }
+    .actu-card-body .details-content p { margin-bottom: 14px; }
+    .share-mini {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--gray-100);
+      flex-wrap: wrap;
+    }
+    .share-mini span.share-mini-label {
+      font-size: 0.7rem;
+      color: var(--gray-600);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      width: 100%;
+      margin-bottom: 4px;
+    }
+    .share-mini a {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+      flex-shrink: 0;
+    }
+    .share-mini a svg { width: 14px; height: 14px; }
   </style>
 </head>
 <body>
@@ -95,75 +225,220 @@
   </div>
 </div>
 
-<!-- ÉDITORIAL DU DIRECTEUR GÉNÉRAL -->
-<section class="section-light">
-  <div class="container" style="max-width:850px;">
+<!-- ÉDITORIAL DU DIRECTEUR GÉNÉRAL — SOMMAIRE + GRANDE CARTE -->
+<section class="section-light" id="editorial-dg">
+  <div class="container" style="max-width:1100px;">
     <div class="reveal">
       <span class="label" style="color:var(--red);display:block;text-align:center;margin-bottom:8px;">Éditorial</span>
       <h2 style="text-align:center;color:var(--navy);font-size:clamp(1.4rem,3.5vw,1.8rem);margin-bottom:30px;">Le mot du Directeur Général</h2>
-      <div style="font-size:1.05rem;line-height:1.8;color:var(--text);text-align:justify;">
-        <img src="../assets/images/photo_dg.jpeg" alt="Directeur Général de l'ISTAT-CI" class="editorial-photo" loading="lazy" srcset="../assets/images/small/photo_dg.jpeg 400w, ../assets/images/medium/photo_dg.jpeg 800w, ../assets/images/photo_dg.jpeg 1055w" sizes="(max-width: 480px) 180px, 220px">
-        <p style="margin-bottom:20px;">Chaque année, et ce depuis sa création en mars 2005, l'INSTITUT SUPÉRIEUR POUR LES TECHNIQUES DE L'AVIATION ET DU TOURISME DE CÔTE D'IVOIRE (ISTAT-CI) enregistre de nombreuses demandes de milliers de jeunes passionnés par les métiers de l'aviation et du tourisme et désireux d'intégrer cette prestigieuse école, en vue de réaliser leurs rêves d'une carrière internationale d'hôtesse de l'air et d'accueil, d'agent de voyage, de tourisme et d'hôtellerie, d'agent d'escale, d'assistant aux passagers, de guide touristique, de professionnel du transit, des transports et de la logistique, de la sécurité et de la sûreté aéroportuaires. Et plus encore.</p>
-        <p style="margin-bottom:20px;">Si, par manque d'opportunités et surtout de moyens financiers, beaucoup de ces jeunes voient leurs rêves voler en éclats, il va sans dire qu'une politique sociale d'aide à la formation et à l'insertion professionnelle de ces jeunes s'impose à l'ISTAT-CI.</p>
-        <p style="margin-bottom:20px;">Laquelle politique, à travers des bourses et des prises en charge exceptionnelles, permet chaque année à des centaines de jeunes déscolarisés de reprendre le chemin de l'école pour un avenir plus radieux et à autant de diplômés sans emploi de démarrer une carrière professionnelle pleine d'avenir en moins d'un an de formation.</p>
-        <p style="margin-bottom:20px;">Qui plus est, l'ISTAT-CI accompagne aussi nos élus locaux (Maires, Présidents de Conseils régionaux...), des responsables d'associations de parents d'élèves, des Présidents d'ONG, de Fondations..., sollicités par les économiquement faibles en vue de scolariser leurs enfants.</p>
-        <p style="margin-bottom:20px;">La grande innovation de l'ISTAT-CI, avec ses partenaires de l'aviation civile internationale, d'initier cette année les formations de base aux spécialités de Pilote de ligne, Mécanicien d'avion et Technicien aéronautique, est motivée par les grandes performances et la forte contribution de l'ISTAT-CI au développement de la formation des professionnels de l'industrie du transport aérien et surtout des techniques aéroportuaires dans le monde, qui lui ont valu le prix de la meilleure école IATA d'Afrique à Montréal, au Canada.</p>
-        <p style="margin-bottom:20px;">Pour ce faire, un test d'entrée en vue de sélectionner les meilleurs s'avère très indispensable.</p>
-        <p style="margin-bottom:30px;">En ma qualité de premier responsable de cet institut de référence internationale, salué par les plus hautes autorités de notre pays, dont le Président de la République lui-même à travers une correspondance de félicitations et d'encouragements pour la promotion et le rayonnement de l'image de notre pays à l'extérieur, il me plaît de lancer un vibrant appel aux élèves, aux étudiants, aux nouveaux bacheliers, aux travailleurs, aux parents d'élèves et à tous les jeunes en quête de formation-emploi, que l'ISTAT-CI, dans sa vision de faire de l'école une véritable entreprise et des étudiants des professionnels en devenir, leur ouvre grandement ses portes et les invite à un embarquement immédiat avec l'ISTAT-CI pour « un décollage et un atterrissage réussis » partout dans le monde.</p>
-        <p style="text-align:right;margin-bottom:4px;"><span style="font-family:'Dancing Script',cursive;font-size:1.6rem;color:var(--navy);">Albert MANGOU</span></p>
-        <p style="text-align:right;font-weight:600;color:var(--navy);font-size:0.95rem;">DG de l'ISTAT-CI</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ACTUALITÉ PRINCIPALE — ARTICLE PRÉINSCRIPTIONS -->
-<section class="section-light">
-  <div class="container" style="max-width:850px;">
-    <div class="reveal visible">
-      <span class="label" style="color:var(--red);display:block;text-align:center;margin-bottom:8px;">À la une</span>
-      <h2 style="text-align:center;color:var(--navy);font-size:clamp(1.5rem,4vw,2.2rem);margin-bottom:8px;">Préinscriptions ouvertes — Rentrée 2026-2027</h2>
-      <p style="text-align:center;color:var(--gray-600);margin-bottom:30px;">Publié le 11 juillet 2026</p>
+      <div class="editorial-layout">
+        <!-- SOMMAIRE -->
+        <nav class="editorial-sommaire" aria-label="Sommaire des actualités">
+          <h4>Sommaire</h4>
+          <ul>
+            <li><a href="#editorial-dg">Le mot du DG</a></li>
+            <li><a href="#article-preinscriptions">Préinscriptions ouvertes</a></li>
+            <li><a href="#article-rentree">Ouverture des inscriptions</a></li>
+            <li><a href="#article-alumni">Nos alumni chez Emirates</a></li>
+            <li><a href="#article-bourses">Bourses d'études</a></li>
+          </ul>
+        </nav>
 
-      <img src="../assets/images/image_pieces_a_fournir_2.png" alt="Dossier de préinscription ISTAT-CI" style="width:100%;border-radius:12px;margin-bottom:30px;box-shadow:0 4px 20px rgba(0,0,0,0.1);" loading="lazy" srcset="../assets/images/small/image_pieces_a_fournir_2.png 400w, ../assets/images/medium/image_pieces_a_fournir_2.png 800w, ../assets/images/image_pieces_a_fournir_2.png 1600w" sizes="(max-width: 480px) 400px, (max-width: 1024px) 800px, 1600px">
+        <div class="editorial-card">
+          <div style="font-size:1.05rem;line-height:1.8;color:var(--text);text-align:justify;">
+            <img src="../assets/images/photo_dg.jpeg" alt="Directeur Général de l'ISTAT-CI" class="editorial-photo" loading="lazy" srcset="../assets/images/small/photo_dg.jpeg 400w, ../assets/images/medium/photo_dg.jpeg 800w, ../assets/images/photo_dg.jpeg 1055w" sizes="(max-width: 480px) 180px, 220px">
+            <p style="margin-bottom:20px;">Chaque année, et ce depuis sa création en mars 2005, l'INSTITUT SUPÉRIEUR POUR LES TECHNIQUES DE L'AVIATION ET DU TOURISME DE CÔTE D'IVOIRE (ISTAT-CI) enregistre de nombreuses demandes de milliers de jeunes passionnés par les métiers de l'aviation et du tourisme et désireux d'intégrer cette prestigieuse école, en vue de réaliser leurs rêves d'une carrière internationale d'hôtesse de l'air et d'accueil, d'agent de voyage, de tourisme et d'hôtellerie, d'agent d'escale, d'assistant aux passagers, de guide touristique, de professionnel du transit, des transports et de la logistique, de la sécurité et de la sûreté aéroportuaires. Et plus encore.</p>
 
-      <div style="font-size:1.05rem;line-height:1.8;color:var(--text);">
-        <p style="margin-bottom:20px;">L'Institut Supérieur pour les Techniques de l'Aviation et du Tourisme de Côte d'Ivoire (<strong>ISTAT-CI</strong>) lance officiellement les <strong>préinscriptions pour la rentrée 2026-2027</strong>. Si vous rêvez d'une carrière dans l'aviation, le tourisme, la logistique aérienne ou l'aéroportuaire, c'est le moment de saisir votre chance.</p>
+            <details>
+              <summary>Lire la suite</summary>
+              <div class="details-content">
+                <p style="margin-bottom:20px;">Si, par manque d'opportunités et surtout de moyens financiers, beaucoup de ces jeunes voient leurs rêves voler en éclats, il va sans dire qu'une politique sociale d'aide à la formation et à l'insertion professionnelle de ces jeunes s'impose à l'ISTAT-CI.</p>
+                <p style="margin-bottom:20px;">Laquelle politique, à travers des bourses et des prises en charge exceptionnelles, permet chaque année à des centaines de jeunes déscolarisés de reprendre le chemin de l'école pour un avenir plus radieux et à autant de diplômés sans emploi de démarrer une carrière professionnelle pleine d'avenir en moins d'un an de formation.</p>
+                <p style="margin-bottom:20px;">Qui plus est, l'ISTAT-CI accompagne aussi nos élus locaux (Maires, Présidents de Conseils régionaux...), des responsables d'associations de parents d'élèves, des Présidents d'ONG, de Fondations..., sollicités par les économiquement faibles en vue de scolariser leurs enfants.</p>
+                <p style="margin-bottom:20px;">La grande innovation de l'ISTAT-CI, avec ses partenaires de l'aviation civile internationale, d'initier cette année les formations de base aux spécialités de Pilote de ligne, Mécanicien d'avion et Technicien aéronautique, est motivée par les grandes performances et la forte contribution de l'ISTAT-CI au développement de la formation des professionnels de l'industrie du transport aérien et surtout des techniques aéroportuaires dans le monde, qui lui ont valu le prix de la meilleure école IATA d'Afrique à Montréal, au Canada.</p>
+                <p style="margin-bottom:20px;">Pour ce faire, un test d'entrée en vue de sélectionner les meilleurs s'avère très indispensable.</p>
+                <p style="margin-bottom:30px;">En ma qualité de premier responsable de cet institut de référence internationale, salué par les plus hautes autorités de notre pays, dont le Président de la République lui-même à travers une correspondance de félicitations et d'encouragements pour la promotion et le rayonnement de l'image de notre pays à l'extérieur, il me plaît de lancer un vibrant appel aux élèves, aux étudiants, aux nouveaux bacheliers, aux travailleurs, aux parents d'élèves et à tous les jeunes en quête de formation-emploi, que l'ISTAT-CI, dans sa vision de faire de l'école une véritable entreprise et des étudiants des professionnels en devenir, leur ouvre grandement ses portes et les invite à un embarquement immédiat avec l'ISTAT-CI pour « un décollage et un atterrissage réussis » partout dans le monde.</p>
+                <p style="text-align:right;margin-bottom:4px;"><span style="font-family:'Dancing Script',cursive;font-size:1.6rem;color:var(--navy);">Albert MANGOU</span></p>
+                <p style="text-align:right;font-weight:600;color:var(--navy);font-size:0.95rem;">DG de l'ISTAT-CI</p>
+                <div class="share-mini" style="margin-top:24px;">
+                <span class="share-mini-label">Suivez-nous sur</span>
+                <a href="https://www.facebook.com/profile.php?id=61577491554635" target="_blank" rel="noopener" onmouseover="this.style.background='#1877F2'" onmouseout="this.style.background='var(--navy)'" title="Facebook"><svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                <a href="https://www.instagram.com/istat.ci/" target="_blank" rel="noopener" onmouseover="this.style.background='linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)'" onmouseout="this.style.background='var(--navy)'" title="Instagram"><svg viewBox="0 0 24 24" fill="white"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.1 1.3C1.3 2.6.9 3.3.6 4.1.3 4.9.1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.1 1.3.3 2.1.6 2.9.3.8.7 1.5 1.3 2.1.7.7 1.3 1.1 2.1 1.3.8.3 1.7.5 2.9.6 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.3-.1 2.1-.3 2.9-.6.8-.3 1.5-.7 2.1-1.3.7-.7 1.1-1.3 1.3-2.1.3-.8.5-1.7.6-2.9.1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.1-1.3-.3-2.1-.6-2.9-.3-.8-.7-1.5-1.3-2.1C21.4 1.3 20.7.9 19.9.6 19.1.3 18.2.1 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg></a>
+                <a href="https://www.youtube.com/@IstatC%C3%B4tedIvoire" target="_blank" rel="noopener" onmouseover="this.style.background='#FF0000'" onmouseout="this.style.background='var(--navy)'" title="YouTube"><svg viewBox="0 0 24 24" fill="white"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg></a>
+                <a href="https://wa.me/2250759520459" target="_blank" rel="noopener" onmouseover="this.style.background='#25D366'" onmouseout="this.style.background='var(--navy)'" title="WhatsApp"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+                <a href="https://www.tiktok.com/@istat.ci" target="_blank" rel="noopener" onmouseover="this.style.background='#000'" onmouseout="this.style.background='var(--navy)'" title="TikTok"><svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13.1a8.28 8.28 0 005.58 2.15V11.8a4.84 4.84 0 01-3.77-1.34V6.69h3.77z"/></svg></a>
+                </div>
+              </div>
+            </details>
+          </div>
 
-        <p style="margin-bottom:20px;">Certifié par l'<strong>IATA</strong> (International Air Transport Association) et l'<strong>ANAC</strong> (Autorité Nationale de l'Aviation Civile), agréé par le <strong>FDFP</strong> (Fonds de Développement de la Formation Professionnelle), l'ISTAT-CI forme depuis plus de 20 ans les professionnels qui font la fierté du secteur aérien ivoirien et international. Nos diplômés exercent dans les plus grandes compagnies aériennes du monde, dont <strong>Emirates</strong>. Certains d'entre eux se sont mis avec succès à leur propre compte en créant des agences de voyage florissantes.</p>
-
-        <h3 style="color:var(--navy);font-size:1.2rem;margin:30px 0 16px;">📋 Filières disponibles</h3>
-        <p style="margin-bottom:24px;">L'ISTAT-CI propose plusieurs filières de formation : <strong>Hôtesse de l'air & Steward</strong> (Personnel Navigant Commercial), <strong>Voyage, Tourisme & Hôtellerie</strong> (agent de voyage, guide touristique), <strong>Transit, Fret & Logistique</strong> (transport aérien et maritime) et <strong>Techniques aéroportuaires</strong> (pilote de ligne, mécanicien d'avion).</p>
-
-        <h3 style="color:var(--navy);font-size:1.2rem;margin:30px 0 16px;">🎓 Bourses & prises en charge</h3>
-        <p style="margin-bottom:24px;">La Direction Générale, qui a fait de l'insertion socio-professionnelle et de la lutte contre le chômage son cheval de bataille, offre des <strong>bourses d'études et des prises en charge exceptionnelles</strong>. Pour elle, le talent ne devrait pas être freiné par des contraintes financières. Deux options de certification sont disponibles : <strong>CQP national</strong> et <strong>IATA international</strong>.</p>
-
-        <p style="margin-bottom:24px;">👉 <em><a href="../index.html#pieces-modal" style="color:var(--red);font-weight:600;" id="linkPiecesModal">Consulter la liste des pièces à fournir</a></em></p>
-
-        <h3 style="color:var(--navy);font-size:1.2rem;margin:30px 0 16px;">📍 Modalités pratiques</h3>
-        <p style="margin-bottom:24px;">Les formations se déroulent sur 9 mois de théorie suivis de 3 mois de stage pratique, avec des cours de jour et en ligne. La date limite de dépôt des dossiers est fixée au <strong style="color:var(--red);">31 juillet 2026</strong>. Les dossiers peuvent être déposés physiquement à l'ISTAT — Abidjan-Plateau, Bouaké, Korhogo, San-Pedro et Yamoussoukro — ou directement en ligne sur le site web de l'ISTAT-CI, nouvellement mis en ligne : <a href="https://www.istat.ci" style="color:var(--red);font-weight:600;" target="_blank" rel="noopener">www.istat.ci</a>. Voir la page de <a href="preinscription.html" style="color:var(--red);font-weight:600;">préinscription</a>.</p>
-
-        <p style="margin-bottom:30px;font-size:1.1rem;"><strong>Ne manquez pas cette opportunité.</strong> Votre avenir dans l'aviation commence aujourd'hui. Remplissez le formulaire de préinscription en ligne dès maintenant :</p>
-      </div>
-
-      <div style="text-align:center;margin-bottom:20px;">
-        <a href="preinscription.html" class="btn btn-primary" style="font-size:1.1rem;padding:16px 50px;">Préinscription en ligne</a>
-      </div>
-
-      <p style="text-align:center;margin-bottom:20px;font-size:1rem;color:var(--text);"><a href="contact.html" style="color:var(--red);font-weight:600;">Contact</a> : <a href="tel:+2250759520459" style="color:var(--navy);">07 59 52 04 59</a> · <a href="tel:+2250101634545" style="color:var(--navy);">01 01 63 45 45</a></p>
-
-      <!-- PARTAGE RÉSEAUX SOCIAUX -->
-      <div style="text-align:center;margin-top:30px;padding-top:24px;border-top:1px solid var(--gray-100);">
-        <p style="color:var(--gray-600);font-size:0.85rem;margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;">Partager cet article</p>
-        <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.istat.ci/pages/actualites.html" target="_blank" rel="noopener" style="width:44px;height:44px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;transition:background 0.3s;" onmouseover="this.style.background='#1877F2'" onmouseout="this.style.background='var(--navy)'" title="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-          <a href="https://wa.me/?text=Pr%C3%A9inscriptions%20ISTAT-CI%202026-2027%20%E2%9C%88%EF%B8%8F%20https://www.istat.ci/pages/actualites.html" target="_blank" rel="noopener" style="width:44px;height:44px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;transition:background 0.3s;" onmouseover="this.style.background='#25D366'" onmouseout="this.style.background='var(--navy)'" title="WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
-          <a href="https://twitter.com/intent/tweet?text=Pr%C3%A9inscriptions%20ISTAT-CI%202026-2027%20%E2%9C%88%EF%B8%8F&url=https://www.istat.ci/pages/actualites.html" target="_blank" rel="noopener" style="width:44px;height:44px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;transition:background 0.3s;" onmouseover="this.style.background='#1DA1F2'" onmouseout="this.style.background='var(--navy)'" title="X (Twitter)"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.istat.ci/pages/actualites.html" target="_blank" rel="noopener" style="width:44px;height:44px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;transition:background 0.3s;" onmouseover="this.style.background='#0A66C2'" onmouseout="this.style.background='var(--navy)'" title="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-          <a href="https://www.youtube.com/@IstatC%C3%B4tedIvoire" target="_blank" rel="noopener" style="width:44px;height:44px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;transition:background 0.3s;" onmouseover="this.style.background='#FF0000'" onmouseout="this.style.background='var(--navy)'" title="YouTube"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg></a>
-          <a href="https://www.instagram.com/istat.ci/" target="_blank" rel="noopener" style="width:44px;height:44px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;transition:background 0.3s;" onmouseover="this.style.background='linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)';this.style.borderRadius='50%'" onmouseout="this.style.background='var(--navy)'" title="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.1 1.3C1.3 2.6.9 3.3.6 4.1.3 4.9.1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.1 1.3.3 2.1.6 2.9.3.8.7 1.5 1.3 2.1.7.7 1.3 1.1 2.1 1.3.8.3 1.7.5 2.9.6 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.3-.1 2.1-.3 2.9-.6.8-.3 1.5-.7 2.1-1.3.7-.7 1.1-1.3 1.3-2.1.3-.8.5-1.7.6-2.9.1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.1-1.3-.3-2.1-.6-2.9-.3-.8-.7-1.5-1.3-2.1C21.4 1.3 20.7.9 19.9.6 19.1.3 18.2.1 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg></a>
-          <a href="https://www.tiktok.com/" target="_blank" rel="noopener" style="width:44px;height:44px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;transition:background 0.3s;" onmouseover="this.style.background='#000'" onmouseout="this.style.background='var(--navy)'" title="TikTok"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13.1a8.28 8.28 0 005.58 2.15V11.8a4.84 4.84 0 01-3.77-1.34V6.69h3.77z"/></svg></a>
+          <!-- PARTAGE — ÉDITORIAL -->
+          <div class="share-mini" style="margin-top:24px;">
+            <span class="share-mini-label">Partager cet éditorial</span>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.istat.ci/pages/actualites.html%23editorial-dg" target="_blank" rel="noopener" onmouseover="this.style.background='#1877F2'" onmouseout="this.style.background='var(--navy)'" title="Facebook"><svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="https://wa.me/?text=Le%20mot%20du%20DG%20de%20l%27ISTAT-CI%20%E2%9C%88%EF%B8%8F%20https://www.istat.ci/pages/actualites.html%23editorial-dg" target="_blank" rel="noopener" onmouseover="this.style.background='#25D366'" onmouseout="this.style.background='var(--navy)'" title="WhatsApp"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+            <a href="https://twitter.com/intent/tweet?text=Le%20mot%20du%20DG%20de%20l%27ISTAT-CI%20%E2%9C%88%EF%B8%8F&url=https://www.istat.ci/pages/actualites.html%23editorial-dg" target="_blank" rel="noopener" onmouseover="this.style.background='#1DA1F2'" onmouseout="this.style.background='var(--navy)'" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.istat.ci/pages/actualites.html%23editorial-dg" target="_blank" rel="noopener" onmouseover="this.style.background='#0A66C2'" onmouseout="this.style.background='var(--navy)'" title="LinkedIn"><svg viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          </div>
         </div>
+      </div>
+
+      <!-- FIL D'ACTUALITÉ — juste avant les cartes d'articles, alignée sur la largeur sommaire + carte DG -->
+      <div class="section-header reveal visible" style="margin-top:60px;">
+        <span class="label" style="color:var(--red);">Fil d'actualité</span>
+        <h2>Dernières nouvelles</h2>
+      </div>
+
+      <div class="actu-grid reveal visible">
+
+        <!-- CARTE — PRÉINSCRIPTIONS (vedette) -->
+        <div class="actu-card actu-card-featured" id="article-preinscriptions">
+          <span class="actu-card-badge">À la une</span>
+          <img src="../assets/images/image_pieces_a_fournir_2.png" alt="Dossier de préinscription ISTAT-CI" loading="lazy" srcset="../assets/images/small/image_pieces_a_fournir_2.png 400w, ../assets/images/medium/image_pieces_a_fournir_2.png 800w, ../assets/images/image_pieces_a_fournir_2.png 1600w" sizes="(max-width: 480px) 400px, (max-width: 1024px) 800px, 1600px">
+          <div class="actu-card-body">
+            <div class="actu-date">Publié le 11 juillet 2026</div>
+            <h3>Préinscriptions ouvertes — Rentrée 2026-2027</h3>
+            <p>L'ISTAT-CI lance officiellement les préinscriptions pour la rentrée 2026-2027. Certifié IATA & ANAC, agréé FDFP, l'institut forme depuis plus de 20 ans les professionnels de l'aviation et du tourisme.</p>
+
+            <details>
+              <summary>Lire l'article complet</summary>
+              <div class="details-content">
+                <p>L'Institut Supérieur pour les Techniques de l'Aviation et du Tourisme de Côte d'Ivoire (<strong>ISTAT-CI</strong>) lance officiellement les <strong>préinscriptions pour la rentrée 2026-2027</strong>. Si vous rêvez d'une carrière dans l'aviation, le tourisme, la logistique aérienne ou l'aéroportuaire, c'est le moment de saisir votre chance.</p>
+                <p>Certifié par l'<strong>IATA</strong> (International Air Transport Association) et l'<strong>ANAC</strong> (Autorité Nationale de l'Aviation Civile), agréé par le <strong>FDFP</strong> (Fonds de Développement de la Formation Professionnelle), l'ISTAT-CI forme depuis plus de 20 ans les professionnels qui font la fierté du secteur aérien ivoirien et international. Nos diplômés exercent dans les plus grandes compagnies aériennes du monde, dont <strong>Emirates</strong>. Certains d'entre eux se sont mis avec succès à leur propre compte en créant des agences de voyage florissantes.</p>
+                <h4 style="color:var(--navy);font-size:1rem;margin:20px 0 10px;">📋 Filières disponibles</h4>
+                <p>L'ISTAT-CI propose plusieurs filières de formation : <strong>Hôtesse de l'air & Steward</strong> (Personnel Navigant Commercial), <strong>Voyage, Tourisme & Hôtellerie</strong> (agent de voyage, guide touristique), <strong>Transit, Fret & Logistique</strong> (transport aérien et maritime) et <strong>Techniques aéroportuaires</strong> (pilote de ligne, mécanicien d'avion).</p>
+                <h4 style="color:var(--navy);font-size:1rem;margin:20px 0 10px;">🎓 Bourses & prises en charge</h4>
+                <p>La Direction Générale, qui a fait de l'insertion socio-professionnelle et de la lutte contre le chômage son cheval de bataille, offre des <strong>bourses d'études et des prises en charge exceptionnelles</strong>. Pour elle, le talent ne devrait pas être freiné par des contraintes financières. Deux options de certification sont disponibles : <strong>CQP national</strong> et <strong>IATA international</strong>.</p>
+                <p>👉 <em><a href="../index.html#pieces-modal" style="color:var(--red);font-weight:600;" id="linkPiecesModal">Consulter la liste des pièces à fournir</a></em></p>
+                <h4 style="color:var(--navy);font-size:1rem;margin:20px 0 10px;">📍 Modalités pratiques</h4>
+                <p>Les formations se déroulent sur 9 mois de théorie suivis de 3 mois de stage pratique, avec des cours de jour et en ligne. La date limite de dépôt des dossiers est fixée au <strong style="color:var(--red);">31 juillet 2026</strong>. Les dossiers peuvent être déposés physiquement à l'ISTAT — Abidjan-Plateau, Bouaké, Korhogo, San-Pedro et Yamoussoukro — ou directement en ligne sur le site web de l'ISTAT-CI, nouvellement mis en ligne : <a href="https://www.istat.ci" style="color:var(--red);font-weight:600;" target="_blank" rel="noopener">www.istat.ci</a>. Voir la page de <a href="preinscription.html" style="color:var(--red);font-weight:600;">préinscription</a>.</p>
+                <p style="font-size:1.02rem;"><strong>Ne manquez pas cette opportunité.</strong> Votre avenir dans l'aviation commence aujourd'hui.</p>
+                <div style="text-align:center;margin:20px 0 8px;">
+                  <a href="preinscription.html" class="btn btn-primary" style="padding:12px 32px;">Préinscription en ligne</a>
+                </div>
+                <p style="text-align:center;font-size:0.9rem;"><a href="contact.html" style="color:var(--red);font-weight:600;">Contact</a> : <a href="tel:+2250759520459" style="color:var(--navy);">07 59 52 04 59</a> · <a href="tel:+2250101634545" style="color:var(--navy);">01 01 63 45 45</a></p>
+                <div class="share-mini" style="margin-top:24px;">
+                <span class="share-mini-label">Suivez-nous sur</span>
+                <a href="https://www.facebook.com/profile.php?id=61577491554635" target="_blank" rel="noopener" onmouseover="this.style.background='#1877F2'" onmouseout="this.style.background='var(--navy)'" title="Facebook"><svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                <a href="https://www.instagram.com/istat.ci/" target="_blank" rel="noopener" onmouseover="this.style.background='linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)'" onmouseout="this.style.background='var(--navy)'" title="Instagram"><svg viewBox="0 0 24 24" fill="white"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.1 1.3C1.3 2.6.9 3.3.6 4.1.3 4.9.1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.1 1.3.3 2.1.6 2.9.3.8.7 1.5 1.3 2.1.7.7 1.3 1.1 2.1 1.3.8.3 1.7.5 2.9.6 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.3-.1 2.1-.3 2.9-.6.8-.3 1.5-.7 2.1-1.3.7-.7 1.1-1.3 1.3-2.1.3-.8.5-1.7.6-2.9.1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.1-1.3-.3-2.1-.6-2.9-.3-.8-.7-1.5-1.3-2.1C21.4 1.3 20.7.9 19.9.6 19.1.3 18.2.1 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg></a>
+                <a href="https://www.youtube.com/@IstatC%C3%B4tedIvoire" target="_blank" rel="noopener" onmouseover="this.style.background='#FF0000'" onmouseout="this.style.background='var(--navy)'" title="YouTube"><svg viewBox="0 0 24 24" fill="white"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg></a>
+                <a href="https://wa.me/2250759520459" target="_blank" rel="noopener" onmouseover="this.style.background='#25D366'" onmouseout="this.style.background='var(--navy)'" title="WhatsApp"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+                <a href="https://www.tiktok.com/@istat.ci" target="_blank" rel="noopener" onmouseover="this.style.background='#000'" onmouseout="this.style.background='var(--navy)'" title="TikTok"><svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13.1a8.28 8.28 0 005.58 2.15V11.8a4.84 4.84 0 01-3.77-1.34V6.69h3.77z"/></svg></a>
+                </div>
+              </div>
+            </details>
+
+            <div class="share-mini">
+              <span class="share-mini-label">Partager cet article</span>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.istat.ci/pages/actualites.html%23article-preinscriptions" target="_blank" rel="noopener" onmouseover="this.style.background='#1877F2'" onmouseout="this.style.background='var(--navy)'" title="Facebook"><svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+              <a href="https://wa.me/?text=Pr%C3%A9inscriptions%20ISTAT-CI%202026-2027%20%E2%9C%88%EF%B8%8F%20https://www.istat.ci/pages/actualites.html%23article-preinscriptions" target="_blank" rel="noopener" onmouseover="this.style.background='#25D366'" onmouseout="this.style.background='var(--navy)'" title="WhatsApp"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+              <a href="https://twitter.com/intent/tweet?text=Pr%C3%A9inscriptions%20ISTAT-CI%202026-2027%20%E2%9C%88%EF%B8%8F&url=https://www.istat.ci/pages/actualites.html%23article-preinscriptions" target="_blank" rel="noopener" onmouseover="this.style.background='#1DA1F2'" onmouseout="this.style.background='var(--navy)'" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.istat.ci/pages/actualites.html%23article-preinscriptions" target="_blank" rel="noopener" onmouseover="this.style.background='#0A66C2'" onmouseout="this.style.background='var(--navy)'" title="LinkedIn"><svg viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          </div>
+          </div>
+        </div>
+
+        <!-- CARTE — RENTRÉE -->
+        <div class="actu-card" id="article-rentree">
+          <img src="../assets/images/equipe_tarmac.jpg" alt="Rentrée 2026-2027" loading="lazy" style="object-position:center 25%;" srcset="../assets/images/small/equipe_tarmac.jpg 400w, ../assets/images/medium/equipe_tarmac.jpg 800w, ../assets/images/equipe_tarmac.jpg 1600w" sizes="(max-width: 480px) 400px, (max-width: 1024px) 800px, 1600px">
+          <div class="actu-card-body">
+            <div class="actu-date">Juillet 2026</div>
+            <h3>Ouverture des inscriptions 2026-2027</h3>
+            <p>Les inscriptions sont ouvertes pour toutes les filières. Formation par vague, cours de jour, du soir et en ligne. Date limite : 31 juillet 2026.</p>
+
+            <details>
+              <summary>Lire la suite</summary>
+              <div class="details-content">
+                <p>Pour accompagner la nouvelle vague de candidats, l'ISTAT-CI propose des cours de jour, du soir et en ligne afin de s'adapter à toutes les disponibilités. Les 12 filières couvrant l'aviation, le tourisme, l'hôtellerie et la logistique aéroportuaire sont ouvertes aux préinscriptions.</p>
+                <p>La date limite de dépôt des dossiers est fixée au <strong style="color:var(--red);">31 juillet 2026</strong>.</p>
+                <div class="share-mini" style="margin-top:24px;">
+                <span class="share-mini-label">Suivez-nous sur</span>
+                <a href="https://www.facebook.com/profile.php?id=61577491554635" target="_blank" rel="noopener" onmouseover="this.style.background='#1877F2'" onmouseout="this.style.background='var(--navy)'" title="Facebook"><svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                <a href="https://www.instagram.com/istat.ci/" target="_blank" rel="noopener" onmouseover="this.style.background='linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)'" onmouseout="this.style.background='var(--navy)'" title="Instagram"><svg viewBox="0 0 24 24" fill="white"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.1 1.3C1.3 2.6.9 3.3.6 4.1.3 4.9.1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.1 1.3.3 2.1.6 2.9.3.8.7 1.5 1.3 2.1.7.7 1.3 1.1 2.1 1.3.8.3 1.7.5 2.9.6 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.3-.1 2.1-.3 2.9-.6.8-.3 1.5-.7 2.1-1.3.7-.7 1.1-1.3 1.3-2.1.3-.8.5-1.7.6-2.9.1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.1-1.3-.3-2.1-.6-2.9-.3-.8-.7-1.5-1.3-2.1C21.4 1.3 20.7.9 19.9.6 19.1.3 18.2.1 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg></a>
+                <a href="https://www.youtube.com/@IstatC%C3%B4tedIvoire" target="_blank" rel="noopener" onmouseover="this.style.background='#FF0000'" onmouseout="this.style.background='var(--navy)'" title="YouTube"><svg viewBox="0 0 24 24" fill="white"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg></a>
+                <a href="https://wa.me/2250759520459" target="_blank" rel="noopener" onmouseover="this.style.background='#25D366'" onmouseout="this.style.background='var(--navy)'" title="WhatsApp"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+                <a href="https://www.tiktok.com/@istat.ci" target="_blank" rel="noopener" onmouseover="this.style.background='#000'" onmouseout="this.style.background='var(--navy)'" title="TikTok"><svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13.1a8.28 8.28 0 005.58 2.15V11.8a4.84 4.84 0 01-3.77-1.34V6.69h3.77z"/></svg></a>
+                </div>
+              </div>
+            </details>
+
+            <div class="share-mini">
+              <span class="share-mini-label">Partager</span>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.istat.ci/pages/actualites.html%23article-rentree" target="_blank" rel="noopener" onmouseover="this.style.background='#1877F2'" onmouseout="this.style.background='var(--navy)'" title="Facebook"><svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+              <a href="https://wa.me/?text=Ouverture%20des%20inscriptions%202026-2027%20ISTAT-CI%20%E2%9C%88%EF%B8%8F%20https://www.istat.ci/pages/actualites.html%23article-rentree" target="_blank" rel="noopener" onmouseover="this.style.background='#25D366'" onmouseout="this.style.background='var(--navy)'" title="WhatsApp"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+            <a href="https://twitter.com/intent/tweet?text=Ouverture%20des%20inscriptions%202026-2027%20ISTAT-CI%20%E2%9C%88%EF%B8%8F&url=https://www.istat.ci/pages/actualites.html%23article-rentree" target="_blank" rel="noopener" onmouseover="this.style.background='#1DA1F2'" onmouseout="this.style.background='var(--navy)'" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.istat.ci/pages/actualites.html%23article-rentree" target="_blank" rel="noopener" onmouseover="this.style.background='#0A66C2'" onmouseout="this.style.background='var(--navy)'" title="LinkedIn"><svg viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          </div>
+          </div>
+        </div>
+
+        <!-- CARTE — ALUMNI -->
+        <div class="actu-card" id="article-alumni">
+          <img src="../assets/images/alumni_2.png" alt="Alumni Emirates" loading="lazy" style="object-position:center top;" srcset="../assets/images/small/alumni_2.png 400w, ../assets/images/medium/alumni_2.png 800w, ../assets/images/alumni_2.png 1600w" sizes="(max-width: 480px) 400px, (max-width: 1024px) 800px, 1600px">
+          <div class="actu-card-body">
+            <div class="actu-date">2026</div>
+            <h3>Nos alumni chez Emirates</h3>
+            <p>Encore une ancienne étudiante de l'ISTAT-CI recrutée par Emirates, confirmant l'excellence de notre formation reconnue à l'international.</p>
+
+            <details>
+              <summary>Lire la suite</summary>
+              <div class="details-content">
+                <p>Cette nouvelle recrue rejoint une longue liste d'anciens étudiants de l'ISTAT-CI qui exercent aujourd'hui dans les plus grandes compagnies aériennes du monde. Un signe supplémentaire de la reconnaissance internationale de la formation dispensée à l'institut.</p>
+                <div class="share-mini" style="margin-top:24px;">
+                <span class="share-mini-label">Suivez-nous sur</span>
+                <a href="https://www.facebook.com/profile.php?id=61577491554635" target="_blank" rel="noopener" onmouseover="this.style.background='#1877F2'" onmouseout="this.style.background='var(--navy)'" title="Facebook"><svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                <a href="https://www.instagram.com/istat.ci/" target="_blank" rel="noopener" onmouseover="this.style.background='linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)'" onmouseout="this.style.background='var(--navy)'" title="Instagram"><svg viewBox="0 0 24 24" fill="white"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.1 1.3C1.3 2.6.9 3.3.6 4.1.3 4.9.1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.1 1.3.3 2.1.6 2.9.3.8.7 1.5 1.3 2.1.7.7 1.3 1.1 2.1 1.3.8.3 1.7.5 2.9.6 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.3-.1 2.1-.3 2.9-.6.8-.3 1.5-.7 2.1-1.3.7-.7 1.1-1.3 1.3-2.1.3-.8.5-1.7.6-2.9.1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.1-1.3-.3-2.1-.6-2.9-.3-.8-.7-1.5-1.3-2.1C21.4 1.3 20.7.9 19.9.6 19.1.3 18.2.1 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg></a>
+                <a href="https://www.youtube.com/@IstatC%C3%B4tedIvoire" target="_blank" rel="noopener" onmouseover="this.style.background='#FF0000'" onmouseout="this.style.background='var(--navy)'" title="YouTube"><svg viewBox="0 0 24 24" fill="white"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg></a>
+                <a href="https://wa.me/2250759520459" target="_blank" rel="noopener" onmouseover="this.style.background='#25D366'" onmouseout="this.style.background='var(--navy)'" title="WhatsApp"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+                <a href="https://www.tiktok.com/@istat.ci" target="_blank" rel="noopener" onmouseover="this.style.background='#000'" onmouseout="this.style.background='var(--navy)'" title="TikTok"><svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13.1a8.28 8.28 0 005.58 2.15V11.8a4.84 4.84 0 01-3.77-1.34V6.69h3.77z"/></svg></a>
+                </div>
+              </div>
+            </details>
+
+            <div class="share-mini">
+              <span class="share-mini-label">Partager</span>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.istat.ci/pages/actualites.html%23article-alumni" target="_blank" rel="noopener" onmouseover="this.style.background='#1877F2'" onmouseout="this.style.background='var(--navy)'" title="Facebook"><svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+              <a href="https://wa.me/?text=Nos%20alumni%20chez%20Emirates%20%E2%9C%88%EF%B8%8F%20https://www.istat.ci/pages/actualites.html%23article-alumni" target="_blank" rel="noopener" onmouseover="this.style.background='#25D366'" onmouseout="this.style.background='var(--navy)'" title="WhatsApp"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+            <a href="https://twitter.com/intent/tweet?text=Nos%20alumni%20chez%20Emirates%20%E2%9C%88%EF%B8%8F&url=https://www.istat.ci/pages/actualites.html%23article-alumni" target="_blank" rel="noopener" onmouseover="this.style.background='#1DA1F2'" onmouseout="this.style.background='var(--navy)'" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.istat.ci/pages/actualites.html%23article-alumni" target="_blank" rel="noopener" onmouseover="this.style.background='#0A66C2'" onmouseout="this.style.background='var(--navy)'" title="LinkedIn"><svg viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          </div>
+          </div>
+        </div>
+
+        <!-- CARTE — BOURSES -->
+        <div class="actu-card" id="article-bourses">
+          <img src="../assets/images/hotesse_avion.jpg" alt="Bourses d'études" loading="lazy" srcset="../assets/images/small/hotesse_avion.jpg 400w, ../assets/images/medium/hotesse_avion.jpg 800w, ../assets/images/hotesse_avion.jpg 1600w" sizes="(max-width: 480px) 400px, (max-width: 1024px) 800px, 1600px">
+          <div class="actu-card-body">
+            <div class="actu-date">2026</div>
+            <h3>Bourses d'études exceptionnelles</h3>
+            <p>La Direction Générale offre des bourses et prises en charge exceptionnelles. Options CQP national et IATA international disponibles.</p>
+
+            <details>
+              <summary>Lire la suite</summary>
+              <div class="details-content">
+                <p>Deux options de certification sont disponibles : <strong>CQP national</strong> et <strong>IATA international</strong>. Pour la Direction Générale, le talent ne doit jamais être freiné par des contraintes financières — d'où cette politique de bourses et de prises en charge exceptionnelles renouvelée chaque année.</p>
+                <div class="share-mini" style="margin-top:24px;">
+                <span class="share-mini-label">Suivez-nous sur</span>
+                <a href="https://www.facebook.com/profile.php?id=61577491554635" target="_blank" rel="noopener" onmouseover="this.style.background='#1877F2'" onmouseout="this.style.background='var(--navy)'" title="Facebook"><svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                <a href="https://www.instagram.com/istat.ci/" target="_blank" rel="noopener" onmouseover="this.style.background='linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)'" onmouseout="this.style.background='var(--navy)'" title="Instagram"><svg viewBox="0 0 24 24" fill="white"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.1 1.3C1.3 2.6.9 3.3.6 4.1.3 4.9.1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.1 1.3.3 2.1.6 2.9.3.8.7 1.5 1.3 2.1.7.7 1.3 1.1 2.1 1.3.8.3 1.7.5 2.9.6 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.3-.1 2.1-.3 2.9-.6.8-.3 1.5-.7 2.1-1.3.7-.7 1.1-1.3 1.3-2.1.3-.8.5-1.7.6-2.9.1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.1-1.3-.3-2.1-.6-2.9-.3-.8-.7-1.5-1.3-2.1C21.4 1.3 20.7.9 19.9.6 19.1.3 18.2.1 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg></a>
+                <a href="https://www.youtube.com/@IstatC%C3%B4tedIvoire" target="_blank" rel="noopener" onmouseover="this.style.background='#FF0000'" onmouseout="this.style.background='var(--navy)'" title="YouTube"><svg viewBox="0 0 24 24" fill="white"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg></a>
+                <a href="https://wa.me/2250759520459" target="_blank" rel="noopener" onmouseover="this.style.background='#25D366'" onmouseout="this.style.background='var(--navy)'" title="WhatsApp"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+                <a href="https://www.tiktok.com/@istat.ci" target="_blank" rel="noopener" onmouseover="this.style.background='#000'" onmouseout="this.style.background='var(--navy)'" title="TikTok"><svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13.1a8.28 8.28 0 005.58 2.15V11.8a4.84 4.84 0 01-3.77-1.34V6.69h3.77z"/></svg></a>
+                </div>
+              </div>
+            </details>
+
+            <div class="share-mini">
+              <span class="share-mini-label">Partager</span>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.istat.ci/pages/actualites.html%23article-bourses" target="_blank" rel="noopener" onmouseover="this.style.background='#1877F2'" onmouseout="this.style.background='var(--navy)'" title="Facebook"><svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+              <a href="https://wa.me/?text=Bourses%20d%27%C3%A9tudes%20exceptionnelles%20ISTAT-CI%20%E2%9C%88%EF%B8%8F%20https://www.istat.ci/pages/actualites.html%23article-bourses" target="_blank" rel="noopener" onmouseover="this.style.background='#25D366'" onmouseout="this.style.background='var(--navy)'" title="WhatsApp"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+            <a href="https://twitter.com/intent/tweet?text=Bourses%20d%27%C3%A9tudes%20exceptionnelles%20ISTAT-CI%20%E2%9C%88%EF%B8%8F&url=https://www.istat.ci/pages/actualites.html%23article-bourses" target="_blank" rel="noopener" onmouseover="this.style.background='#1DA1F2'" onmouseout="this.style.background='var(--navy)'" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.istat.ci/pages/actualites.html%23article-bourses" target="_blank" rel="noopener" onmouseover="this.style.background='#0A66C2'" onmouseout="this.style.background='var(--navy)'" title="LinkedIn"><svg viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -218,42 +493,6 @@
   </div>
 </section>
 
-<!-- AUTRES ACTUALITÉS -->
-<section class="section-light">
-  <div class="container">
-    <div class="section-header reveal visible">
-      <span class="label" style="color:var(--red);">Fil d'actualité</span>
-      <h2>Dernières nouvelles</h2>
-    </div>
-    <div class="actu-grid reveal visible">
-      <div class="actu-card">
-        <img src="../assets/images/equipe_tarmac.jpg" alt="Rentrée 2026-2027" loading="lazy" style="object-position:center 25%;" srcset="../assets/images/small/equipe_tarmac.jpg 400w, ../assets/images/medium/equipe_tarmac.jpg 800w, ../assets/images/equipe_tarmac.jpg 1600w" sizes="(max-width: 480px) 400px, (max-width: 1024px) 800px, 1600px">
-        <div class="actu-card-body">
-          <div class="actu-date">Juillet 2026</div>
-          <h3>Ouverture des inscriptions 2026-2027</h3>
-          <p>Les inscriptions sont ouvertes pour toutes les filières. Formation par vague, cours de jour, du soir et en ligne. Date limite : 31 juillet 2026.</p>
-        </div>
-      </div>
-      <div class="actu-card">
-        <img src="../assets/images/alumni_2.png" alt="Alumni Emirates" loading="lazy" style="object-position:center top;" srcset="../assets/images/small/alumni_2.png 400w, ../assets/images/medium/alumni_2.png 800w, ../assets/images/alumni_2.png 1600w" sizes="(max-width: 480px) 400px, (max-width: 1024px) 800px, 1600px">
-        <div class="actu-card-body">
-          <div class="actu-date">2026</div>
-          <h3>Nos alumni chez Emirates</h3>
-          <p>Encore une ancienne étudiante de l'ISTAT-CI recrutée par Emirates, confirmant l'excellence de notre formation reconnue à l'international.</p>
-        </div>
-      </div>
-      <div class="actu-card">
-        <img src="../assets/images/hotesse_avion.jpg" alt="Bourses d'études" loading="lazy" srcset="../assets/images/small/hotesse_avion.jpg 400w, ../assets/images/medium/hotesse_avion.jpg 800w, ../assets/images/hotesse_avion.jpg 1600w" sizes="(max-width: 480px) 400px, (max-width: 1024px) 800px, 1600px">
-        <div class="actu-card-body">
-          <div class="actu-date">2026</div>
-          <h3>Bourses d'études exceptionnelles</h3>
-          <p>La Direction Générale offre des bourses et prises en charge exceptionnelles. Options CQP national et IATA international disponibles.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CTA -->
 <section class="section-navy" style="padding:60px 0;">
   <div class="container" style="text-align:center;">
@@ -277,6 +516,8 @@
           <a href="https://www.facebook.com/profile.php?id=61577491554635" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
           <a href="https://www.instagram.com/istat.ci/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.1 1.3C1.3 2.6.9 3.3.6 4.1.3 4.9.1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.1 1.3.3 2.1.6 2.9.3.8.7 1.5 1.3 2.1.7.7 1.3 1.1 2.1 1.3.8.3 1.7.5 2.9.6 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.3-.1 2.1-.3 2.9-.6.8-.3 1.5-.7 2.1-1.3.7-.7 1.1-1.3 1.3-2.1.3-.8.5-1.7.6-2.9.1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.1-1.3-.3-2.1-.6-2.9-.3-.8-.7-1.5-1.3-2.1C21.4 1.3 20.7.9 19.9.6 19.1.3 18.2.1 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg></a>
           <a href="https://www.youtube.com/@IstatC%C3%B4tedIvoire" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg></a>
+          <a href="https://wa.me/2250759520459" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-1-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.3l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.5-1.5-3.3-1.5-5.2C2.2 6.6 6.6 2.2 12 2.2s9.8 4.4 9.8 9.8-4.4 9.8-9.8 9.8zM12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 5.9L0 24l6.3-1.6c1.7.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12S18.6 0 12 0z"/></svg></a>
+          <a href="https://www.tiktok.com/@istat.ci" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13.1a8.28 8.28 0 005.58 2.15V11.8a4.84 4.84 0 01-3.77-1.34V6.69h3.77z"/></svg></a>
         </div>
       </div>
       <div><h5>Navigation</h5><ul><li><a href="../index.html">Accueil</a></li><li><a href="formations.html">Formations</a></li><li><a href="a-propos.html">À propos</a></li><li><a href="bourses.html">Bourses</a></li><li><a href="contact.html">Contact</a></li></ul></div>

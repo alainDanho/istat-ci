@@ -47,6 +47,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ── CARTES D'ARTICLES + ÉDITORIAL DG : AGRANDISSEMENT AU CLIC SUR "LIRE LA SUITE" (accordéon) ──
+  const articleDetails = document.querySelectorAll('.actu-grid .actu-card details, .editorial-card details');
+  articleDetails.forEach(details => {
+    details.addEventListener('toggle', () => {
+      const card = details.closest('.actu-card') || details.closest('.editorial-card');
+      if (card) card.classList.toggle('is-expanded', details.open);
+      if (details.open) {
+        articleDetails.forEach(other => {
+          if (other !== details && other.open) other.open = false;
+        });
+      }
+    });
+  });
+
   // ── SCROLL REVEAL ──
   const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
   if (reveals.length) {
